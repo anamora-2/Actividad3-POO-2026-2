@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 /**
  *
@@ -16,13 +17,14 @@ import java.awt.event.ActionListener;
 public class VentanaCubo extends JFrame implements ActionListener {
     private Container contenedor;
     private JLabel lado, volumen, superficie;
+    private JLabel imagenFigura;
     private JTextField campoLado;
     private JButton calcular;
     
     public VentanaCubo(){
         inicio();
         setTitle("Cubo");
-        setSize(280, 200);
+        setSize(280, 290);
         setLocationRelativeTo(null);
         setResizable(false);
     }
@@ -30,26 +32,36 @@ public class VentanaCubo extends JFrame implements ActionListener {
     private void inicio(){
         contenedor = getContentPane(); 
         contenedor.setLayout(null); 
+        
+        imagenFigura = new JLabel();
+        URL rutaImagen = getClass().getResource("/imagenes/cubo.png");
+        if (rutaImagen != null) {
+            ImageIcon icono = new ImageIcon(rutaImagen);
+            Image imagenEscalada = icono.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+            imagenFigura.setIcon(new ImageIcon(imagenEscalada));
+        }
+        imagenFigura.setBounds(95, 10, 90, 90);
 
         lado = new JLabel();
         lado.setText("Lado (cms):");
-        lado.setBounds(20, 20, 135, 23);
+        lado.setBounds(20, 110, 135, 23);
         campoLado = new JTextField();
-        campoLado.setBounds(100, 20, 135, 23);
+        campoLado.setBounds(100, 110, 135, 23);
 
         calcular = new JButton();
         calcular.setText("Calcular");
-        calcular.setBounds(100, 50, 135, 23);
+        calcular.setBounds(100, 140, 135, 23);
         calcular.addActionListener(this);
 
         volumen = new JLabel();
         volumen.setText("Volumen (cm3):");
-        volumen.setBounds(20, 90, 135, 23);
+        volumen.setBounds(20, 180, 200, 23);
 
         superficie = new JLabel();
         superficie.setText("Superficie (cm2):");
-        superficie.setBounds(20, 120, 135, 23);
+        superficie.setBounds(20, 210, 200, 23);
 
+        contenedor.add(imagenFigura);
         contenedor.add(lado);
         contenedor.add(campoLado);
         contenedor.add(calcular);
